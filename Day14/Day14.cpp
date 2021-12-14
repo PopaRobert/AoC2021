@@ -44,7 +44,7 @@ int main(){
         if(cnt[i] != 0)
             minn = min(minn, cnt[i]);
     }
-    cout << maxx << ' ' << minn << '\n';
+    cout << maxx - minn << '\n';
 
     fin.close();
     fin.open("Day14.txt");
