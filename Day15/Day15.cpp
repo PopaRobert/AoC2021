@@ -7,14 +7,13 @@
 
 using namespace std;
 
-#define ROW 500
-#define COL 500
+#define N 500
 
 bool inGrid(int i, int j){
-    return (i >= 0 && i < ROW && j >= 0 && j < COL);
+    return (i >= 0 && i < N && j >= 0 && j < N);
 }
 
-int shortest(int grid[ROW][COL], int row, int col){
+int shortest(int grid[N][N], int row, int col){
     int dis[row][col];
     for (int i = 0; i < row; i++)
         for (int j = 0; j < col; j++)
@@ -57,7 +56,7 @@ int shortest(int grid[ROW][COL], int row, int col){
     return dis[row - 1][col - 1];
 }
 
-void addGrid(int grid[ROW][COL], int x, int y, int xM, int yM){
+void addGrid(int grid[N][N], int x, int y, int xM, int yM){
     for(int i = x; i < x + 100; ++i)
         for(int j = y; j < y + 100; ++j)
             if(grid[i-xM][j-yM] == 9)
@@ -68,7 +67,7 @@ void addGrid(int grid[ROW][COL], int x, int y, int xM, int yM){
 
 int main()
 {
-    int grid[ROW][COL];
+    int grid[N][N];
     ifstream fin("Day15.txt");
     char ch;
     for(int i = 0; i < 100; ++i)
@@ -104,6 +103,6 @@ int main()
     addGrid(grid, 400, 300, 100, 0);
     addGrid(grid, 400, 400, 100, 0);
 
-    cout << shortest(grid, ROW, COL) - grid[0][0] << endl;
+    cout << shortest(grid, N, N) - grid[0][0] << endl;
     return 0;
 }
