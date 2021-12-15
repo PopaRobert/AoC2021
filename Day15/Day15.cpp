@@ -9,18 +9,14 @@ using namespace std;
 #define ROW 500
 #define COL 500
 
-struct cell
-{
+struct cell{
     int x, y;
     int distance;
-    cell(int x, int y, int distance):
-        x(x), y(y), distance(distance) {}
+    cell(int x, int y, int distance): x(x), y(y), distance(distance) {}
 };
 
-bool operator<(const cell& a, const cell& b)
-{
-    if (a.distance == b.distance)
-    {
+bool operator < (const cell& a, const cell& b){
+    if (a.distance == b.distance){
         if (a.x != b.x)
             return (a.x < b.x);
         else
@@ -29,13 +25,11 @@ bool operator<(const cell& a, const cell& b)
     return (a.distance < b.distance);
 }
 
-bool isInsideGrid(int i, int j)
-{
+bool isInsideGrid(int i, int j){
     return (i >= 0 && i < ROW && j >= 0 && j < COL);
 }
 
-int shortest(int grid[ROW][COL], int row, int col)
-{
+int shortest(int grid[ROW][COL], int row, int col){
     int dis[row][col];
     for (int i = 0; i < row; i++)
         for (int j = 0; j < col; j++)
@@ -46,18 +40,15 @@ int shortest(int grid[ROW][COL], int row, int col)
     st.insert(cell(0, 0, 0));
     dis[0][0] = grid[0][0];
 
-    while (!st.empty())
-    {
+    while (!st.empty()){
         cell k = *st.begin();
         st.erase(st.begin());
-        for (int i = 0; i < 4; i++)
-        {
+        for (int i = 0; i < 4; i++){
             int x = k.x + dx[i];
             int y = k.y + dy[i];
             if (!isInsideGrid(x, y))
                 continue;
-            if (dis[x][y] > dis[k.x][k.y] + grid[x][y])
-            {
+            if (dis[x][y] > dis[k.x][k.y] + grid[x][y]){
                 if (dis[x][y] != INT_MAX)
                     st.erase(st.find(cell(x, y, dis[x][y])));
                 dis[x][y] = dis[k.x][k.y] + grid[x][y];
